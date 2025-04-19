@@ -1,0 +1,90 @@
+{
+  "BTC/USDC": {
+    "buys": {
+      "60577.30": [
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "1.57600",
+          "order_id": 15,
+          "pair": "BTC/USDC",
+          "limit_price": "60577.30",
+          "side": "BUY"
+        },
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "0.47600",
+          "order_id": 18,
+          "pair": "BTC/USDC",
+          "limit_price": "60577.30",
+          "side": "BUY"
+        },
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "1.00000",
+          "order_id": 19,
+          "pair": "BTC/USDC",
+          "limit_price": "60577.30",
+          "side": "BUY"
+        }
+      ],
+      "61577.30": [
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "2.00000",
+          "order_id": 12,
+          "pair": "BTC/USDC",
+          "limit_price": "61577.30",
+          "side": "BUY"
+        }
+      ],
+      "62877.30": [
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "4.50000",
+          "order_id": 13,
+          "pair": "BTC/USDC",
+          "limit_price": "62877.30",
+          "side": "BUY"
+        },
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "3.50000",
+          "order_id": 14,
+          "pair": "BTC/USDC",
+          "limit_price": "62877.30",
+          "side": "BUY"
+        }
+      ]
+    },
+    "sells": {
+      "65860.30": [
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "1.58900",
+          "order_id": 16,
+          "pair": "BTC/USDC",
+          "limit_price": "65860.30",
+          "side": "SELL"
+        }
+      ],
+      "66490.50": [
+        {
+          "type_op": "CREATE",
+          "account_id": 2,
+          "amount": "2.67600",
+          "order_id": 17,
+          "pair": "BTC/USDC",
+          "limit_price": "66490.50",
+          "side": "SELL"
+        }
+      ]
+    }
+  }
+}
