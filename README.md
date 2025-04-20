@@ -1,4 +1,4 @@
-# Matching Engine Service
+# Order Matching Engine Service
 
 A high-performance order matching engine built in Rust using Actix-Web, Tokio, and an in-memory orderbook. The service supports RESTful HTTP APIs for creating, deleting, and querying orders and trades, automatic incremental ID assignment, background processing via an in-process queue, real-time WebSocket broadcasts of events, and Docker containerization.
 
