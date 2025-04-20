@@ -223,5 +223,50 @@
     "pair": "BTC/USDT",
     "limit_price": "65555.00",
     "side": "BUY"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 23,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "BUY"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 24,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "BUY"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 25,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "SELL"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 26,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "SELL"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 27,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "BUY"
   }
 ]

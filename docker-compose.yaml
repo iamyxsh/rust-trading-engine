@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  matching-engine:
+    build: .
+    container_name: matching-engine
+    ports:
+      - '5050:5050'
+    volumes:
+      - ./jsons:/app/jsons
+    restart: unless-stopped
+    environment:
+      RUST_LOG: actix_web=info

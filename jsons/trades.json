@@ -47,5 +47,19 @@
     "amount": "1.50000",
     "price": "61577.30",
     "pair": "BTC/USDC"
+  },
+  {
+    "buy_order_id": 23,
+    "sell_order_id": 25,
+    "amount": "0.25000",
+    "price": "65555.00",
+    "pair": "BTC/USDT"
+  },
+  {
+    "buy_order_id": 24,
+    "sell_order_id": 26,
+    "amount": "0.25000",
+    "price": "65555.00",
+    "pair": "BTC/USDT"
   }
 ]
