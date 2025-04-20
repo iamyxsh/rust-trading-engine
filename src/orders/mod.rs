@@ -37,28 +37,6 @@ pub struct Order {
     pub side: Side,
 }
 
-impl Order {
-    pub fn new(
-        type_op: TypeOp,
-        account_id: u64,
-        amount: impl Into<Decimal>,
-        order_id: u64,
-        pair: String,
-        limit_price: impl Into<Decimal>,
-        side: Side,
-    ) -> Self {
-        Self {
-            type_op,
-            account_id,
-            amount: amount.into(),
-            order_id,
-            pair: pair.into(),
-            limit_price: limit_price.into(),
-            side,
-        }
-    }
-}
-
 impl Default for Side {
     fn default() -> Self {
         Side::Buy

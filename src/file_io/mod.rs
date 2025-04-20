@@ -5,7 +5,7 @@ use std::{
     path::Path,
 };
 
-pub fn read<T, P>(path: P) -> std::io::Result<T>
+pub fn read<T, P>(path: P) -> std::io::Result<(T)>
 where
     T: DeserializeOwned,
     P: AsRef<Path>,
@@ -31,9 +31,18 @@ where
     Ok(())
 }
 
-pub fn append_json_line<T: Serialize>(path: &str, item: &T) -> io::Result<()> {
-    let mut f = OpenOptions::new().append(true).create(true).open(path)?;
-    let line = serde_json::to_string(item).map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
-    writeln!(f, "{}", line)?;
-    Ok(())
+pub fn append_json_to_array<T, P>(path: P, item: &T) -> io::Result<()>
+where
+    T: Serialize + DeserializeOwned + Clone,
+    P: AsRef<Path>,
+{
+    let mut vec: Vec<T> = match read(&path) {
+        Ok(existing) => existing,
+        Err(e) if e.kind() == io::ErrorKind::NotFound => Vec::new(),
+        Err(e) => return Err(e),
+    };
+
+    vec.push(item.clone());
+
+    write(path, &vec)
 }

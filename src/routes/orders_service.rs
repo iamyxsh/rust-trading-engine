@@ -1,16 +1,20 @@
-use std::sync::{Arc, Mutex};
+use std::sync::{
+    atomic::{AtomicUsize, Ordering},
+    Arc, Mutex,
+};
 
 use actix_web::{delete, get, post, web, HttpResponse, Responder, Scope};
+use rust_decimal::Decimal;
 use serde::Deserialize;
 use tokio::sync::mpsc;
 
 use crate::{
-    orders::{Order, TypeOp},
+    orders::{Order, Side, TypeOp},
     trading_engine::MatchingEngine,
 };
 
 pub fn order_scope() -> Scope {
-    web::scope("/zscore")
+    web::scope("/order")
         .service(get_orders)
         .service(create_order)
         .service(delete_order)
@@ -30,11 +34,27 @@ async fn get_orders(
 
 #[post("/")]
 async fn create_order(
-    item: web::Json<Order>,
+    item: web::Json<NewOrderRequest>,
+    id_counter: web::Data<Arc<AtomicUsize>>,
     tx: web::Data<mpsc::Sender<Order>>,
 ) -> impl Responder {
-    let _ = tx.send(item.into_inner()).await;
-    HttpResponse::Ok().body("Order queued")
+    let new_id = id_counter.fetch_add(1, Ordering::SeqCst);
+
+    let order = Order {
+        type_op: TypeOp::Create,
+        account_id: item.account_id,
+        amount: item.amount,
+        order_id: new_id as u64,
+        pair: item.pair.clone(),
+        limit_price: item.limit_price,
+        side: item.side.clone(),
+    };
+
+    if tx.send(order.clone()).await.is_err() {
+        return HttpResponse::InternalServerError().body("Queue error");
+    }
+
+    HttpResponse::Ok().json(serde_json::json!({ "order": order }))
 }
 
 #[delete("/")]
@@ -54,4 +74,15 @@ async fn delete_order(
 #[derive(Deserialize)]
 struct DeleteParams {
     order_id: u64,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct NewOrderRequest {
+    pub account_id: u64,
+    #[serde(with = "rust_decimal::serde::str")]
+    pub amount: Decimal,
+    pub pair: String,
+    #[serde(with = "rust_decimal::serde::str")]
+    pub limit_price: Decimal,
+    pub side: Side,
 }

@@ -5,7 +5,10 @@ use std::{
     collections::HashMap,
     env,
     error::Error,
-    sync::{Arc, Mutex},
+    sync::{
+        atomic::{AtomicU64, AtomicUsize},
+        Arc, Mutex,
+    },
 };
 use tokio::sync::mpsc;
 use worker::process_tasks;
@@ -25,6 +28,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
 
     let orders: Vec<Order> = file_io::read("./jsons/orders.json")?;
+    let orders_len = orders.len();
 
     let mut engine = MatchingEngine::new();
     let mut trades: Vec<Trade> = Vec::new();
@@ -44,7 +48,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("Wrote orderbook.json and trades.json");
 
     let engine = Arc::new(Mutex::new(engine.clone()));
-    let (tx, mut rx) = mpsc::channel::<Order>(256);
+    let (tx, rx) = mpsc::channel::<Order>(256);
+
+    let id_counter = Arc::new(AtomicUsize::new(orders_len));
 
     let worker_engine = engine.clone();
 
@@ -53,6 +59,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(tx.clone()))
+            .app_data(web::Data::new(id_counter.clone()))
             .app_data(web::Data::new(tx.clone()))
             .app_data(web::Data::new(engine.clone()))
             .service(orders_service::order_scope())

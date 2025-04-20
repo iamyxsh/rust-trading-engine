@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::orders::{Order, Side, TypeOp};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Trade {
     pub buy_order_id: u64,
     pub sell_order_id: u64,
@@ -13,6 +13,7 @@ pub struct Trade {
     pub amount: Decimal,
     #[serde(with = "rust_decimal::serde::str")]
     pub price: Decimal,
+    pub pair: String,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -52,6 +53,7 @@ impl OrderBook {
                     sell_order_id: maker.order_id,
                     amount: qty,
                     price: maker.limit_price,
+                    pair: taker.pair.clone(),
                 });
                 taker.amount -= qty;
                 maker.amount -= qty;
@@ -92,6 +94,7 @@ impl OrderBook {
                     sell_order_id: taker.order_id,
                     amount: qty,
                     price: maker.limit_price,
+                    pair: taker.pair.clone(),
                 });
                 taker.amount -= qty;
                 maker.amount -= qty;
