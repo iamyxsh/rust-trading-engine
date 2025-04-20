@@ -17,7 +17,7 @@ pub enum Side {
     Sell,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Order {
     pub type_op: TypeOp,
 
@@ -56,5 +56,17 @@ impl Order {
             limit_price: limit_price.into(),
             side,
         }
+    }
+}
+
+impl Default for Side {
+    fn default() -> Self {
+        Side::Buy
+    }
+}
+
+impl Default for TypeOp {
+    fn default() -> Self {
+        TypeOp::Create
     }
 }

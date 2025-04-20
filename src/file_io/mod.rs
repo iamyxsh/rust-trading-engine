@@ -1,7 +1,7 @@
 use serde::{de::DeserializeOwned, Serialize};
 use std::{
     fs::{File, OpenOptions},
-    io::{BufReader, BufWriter},
+    io::{self, BufReader, BufWriter, Write},
     path::Path,
 };
 
@@ -28,5 +28,12 @@ where
         .open(path)?;
     let writer = BufWriter::new(file);
     serde_json::to_writer_pretty(writer, value)?;
+    Ok(())
+}
+
+pub fn append_json_line<T: Serialize>(path: &str, item: &T) -> io::Result<()> {
+    let mut f = OpenOptions::new().append(true).create(true).open(path)?;
+    let line = serde_json::to_string(item).map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+    writeln!(f, "{}", line)?;
     Ok(())
 }

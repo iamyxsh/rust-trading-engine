@@ -15,7 +15,7 @@ pub struct Trade {
     pub price: Decimal,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct OrderBook {
     buys: BTreeMap<Decimal, VecDeque<Order>>,
     sells: BTreeMap<Decimal, VecDeque<Order>>,
@@ -75,7 +75,6 @@ impl OrderBook {
     }
 
     fn match_sell(&mut self, mut taker: Order, trades: &mut Vec<Trade>) {
-        // Iterate through the highest‐price BUY levels first
         let mut buy_prices: Vec<Decimal> = self.buys.keys().cloned().collect();
         buy_prices.sort_by(|a, b| b.cmp(a));
 
@@ -132,6 +131,7 @@ impl OrderBook {
     }
 }
 
+#[derive(Debug, Serialize, Clone)]
 pub struct MatchingEngine {
     pub books: HashMap<String, OrderBook>,
     pub order_index: HashMap<u64, (String, Side, Decimal)>,
@@ -166,5 +166,20 @@ impl MatchingEngine {
                 }
             }
         }
+    }
+
+    pub fn gte_orders_by_account(&self, account_id: u64) -> Vec<Order> {
+        let mut result: Vec<Order> = Vec::new();
+        for book in self.books.values() {
+            for queue in book.buys.values().chain(book.sells.values()) {
+                for order in queue {
+                    if order.account_id == account_id {
+                        result.push(order.clone());
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }
