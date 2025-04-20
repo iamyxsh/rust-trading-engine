@@ -5,16 +5,16 @@ use std::{
     collections::HashMap,
     env,
     error::Error,
-    sync::{
-        atomic::{AtomicU64, AtomicUsize},
-        Arc, Mutex,
-    },
+    sync::{atomic::AtomicUsize, Arc, Mutex},
 };
 use tokio::sync::mpsc;
+use trading_engine::{
+    matching_engine::{MatchingEngine, Trade},
+    orderbook::OrderBook,
+};
 use worker::process_tasks;
 
-use orders::Order;
-use trading_engine::{MatchingEngine, OrderBook, Trade};
+use orders::{Order, TypeOp};
 
 mod file_io;
 mod orders;
@@ -28,7 +28,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
 
     let orders: Vec<Order> = file_io::read("./jsons/orders.json")?;
-    let orders_len = orders.len();
+    let orders_len = orders
+        .iter()
+        .filter(|o| o.type_op == TypeOp::Create)
+        .count()
+        + 1;
 
     let mut engine = MatchingEngine::new();
     let mut trades: Vec<Trade> = Vec::new();

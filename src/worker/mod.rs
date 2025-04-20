@@ -9,7 +9,7 @@ use tokio::sync::mpsc::Receiver;
 use crate::{
     file_io::{self, append_json_to_array},
     orders::Order,
-    trading_engine::{MatchingEngine, Trade},
+    trading_engine::matching_engine::{MatchingEngine, Trade},
 };
 
 pub fn process_tasks(worker_engine: Arc<Mutex<MatchingEngine>>, mut rx: Receiver<Order>) {

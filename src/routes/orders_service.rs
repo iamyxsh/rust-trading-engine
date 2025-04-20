@@ -10,7 +10,7 @@ use tokio::sync::mpsc;
 
 use crate::{
     orders::{Order, Side, TypeOp},
-    trading_engine::MatchingEngine,
+    trading_engine::matching_engine::MatchingEngine,
 };
 
 pub fn order_scope() -> Scope {
@@ -57,17 +57,38 @@ async fn create_order(
     HttpResponse::Ok().json(serde_json::json!({ "order": order }))
 }
 
-#[delete("/")]
+#[delete("/{order_id}")]
 async fn delete_order(
-    query: web::Query<DeleteParams>,
+    order_id: web::Path<u64>,
     tx: web::Data<mpsc::Sender<Order>>,
+    engine: web::Data<Arc<Mutex<MatchingEngine>>>,
 ) -> impl Responder {
+    let order_id = order_id.into_inner();
+    let (pair, side, price, account_id, amount) = {
+        let eng = engine.lock().unwrap();
+        let orig: &Order = &eng.order_index[&order_id];
+        (
+            orig.pair.clone(),
+            orig.side.clone(),
+            orig.limit_price,
+            orig.account_id,
+            orig.amount,
+        )
+    };
+
     let del = Order {
         type_op: TypeOp::Delete,
-        order_id: query.order_id,
-        ..Default::default()
+        order_id,
+        pair,
+        side,
+        limit_price: price,
+        account_id,
+        amount,
     };
-    let _ = tx.send(del).await;
+
+    if tx.send(del).await.is_err() {
+        return HttpResponse::InternalServerError().body("Queue error");
+    }
     HttpResponse::Ok().body("Delete queued")
 }
 
