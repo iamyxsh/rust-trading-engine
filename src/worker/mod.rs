@@ -1,7 +1,4 @@
-use std::{
-    error,
-    sync::{Arc, Mutex},
-};
+use std::sync::{Arc, Mutex};
 
 use log::error;
 use tokio::sync::mpsc::Receiver;

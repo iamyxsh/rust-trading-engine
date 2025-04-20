@@ -92,11 +92,6 @@ async fn delete_order(
     HttpResponse::Ok().body("Delete queued")
 }
 
-#[derive(Deserialize)]
-struct DeleteParams {
-    order_id: u64,
-}
-
 #[derive(Debug, Deserialize)]
 pub struct NewOrderRequest {
     pub account_id: u64,

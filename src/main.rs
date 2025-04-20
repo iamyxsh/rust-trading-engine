@@ -1,6 +1,6 @@
 use actix_web::{web, App, HttpServer};
 
-use routes::orders_service;
+use routes::{orders_service, trades_service};
 use std::{
     collections::HashMap,
     env,
@@ -67,6 +67,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
             .app_data(web::Data::new(tx.clone()))
             .app_data(web::Data::new(engine.clone()))
             .service(orders_service::order_scope())
+            .service(trades_service::trades_scope())
     })
     .bind(("0.0.0.0", 5050))?
     .run()

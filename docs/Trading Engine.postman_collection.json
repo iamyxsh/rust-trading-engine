@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "28769447-b12e-4294-806d-40d7ee165b97",
+		"name": "Trading Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34661999"
+	},
+	"item": [
+		{
+			"name": "Create Trade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_id\": 77,\n    \"amount\": \"0.25000\",\n    \"pair\": \"BTC/USDT\",\n    \"limit_price\": \"65555.00\",\n    \"side\": \"BUY\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/order/",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"order",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": 77,\n    \"amount\": \"0.25000\",\n    \"pair\": \"BTC/USDT\",\n    \"limit_price\": \"65555.00\",\n    \"side\": \"BUY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5050/order/",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"order",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "135"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 14:04:20 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"order\": {\n        \"account_id\": 77,\n        \"amount\": \"0.25000\",\n        \"limit_price\": \"65555.00\",\n        \"order_id\": 22,\n        \"pair\": \"BTC/USDT\",\n        \"side\": \"BUY\",\n        \"type_op\": \"CREATE\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/order/2",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"order",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Order By Account ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5050/order/2",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"order",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "1003"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 13:49:36 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"1.57600\",\n        \"order_id\": 15,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"60577.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"0.47600\",\n        \"order_id\": 18,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"60577.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"1.00000\",\n        \"order_id\": 19,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"60577.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"2.00000\",\n        \"order_id\": 12,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"61577.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"4.50000\",\n        \"order_id\": 13,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"62877.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"3.50000\",\n        \"order_id\": 14,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"62877.30\",\n        \"side\": \"BUY\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"1.58900\",\n        \"order_id\": 16,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"65860.30\",\n        \"side\": \"SELL\"\n    },\n    {\n        \"type_op\": \"CREATE\",\n        \"account_id\": 2,\n        \"amount\": \"2.67600\",\n        \"order_id\": 17,\n        \"pair\": \"BTC/USDC\",\n        \"limit_price\": \"66490.50\",\n        \"side\": \"SELL\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Delete Orders",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/order/22",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"order",
+						"22"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Order by Order ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5050/order/22",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"order",
+								"22"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "13"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 14:04:36 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "Delete queued"
+				}
+			]
+		},
+		{
+			"name": "Get Trades",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5050/trades/?pair=BTC/USDC",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"trades",
+						""
+					],
+					"query": [
+						{
+							"key": "pair",
+							"value": "BTC/USDC"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Trades by Limit",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5050/trades/?pair=BTC/USDC&order=desc&sort=price&limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"trades",
+								""
+							],
+							"query": [
+								{
+									"key": "pair",
+									"value": "BTC/USDC"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "468"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 14:31:11 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"buy_order_id\": 2,\n        \"sell_order_id\": 1,\n        \"amount\": \"0.00230\",\n        \"price\": \"63500.00\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 3,\n        \"sell_order_id\": 4,\n        \"amount\": \"0.00798\",\n        \"price\": \"62880.54\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 9,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.34500\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 10,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.00000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 11,\n        \"sell_order_id\": 8,\n        \"amount\": \"0.50000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    }\n]"
+				},
+				{
+					"name": "Trades by Pair",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5050/trades/?pair=BTC/USDC",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"trades",
+								""
+							],
+							"query": [
+								{
+									"key": "pair",
+									"value": "BTC/USDC"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "652"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 14:29:15 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"buy_order_id\": 7,\n        \"sell_order_id\": 6,\n        \"amount\": \"0.20000\",\n        \"price\": \"47500\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 9,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.34500\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 10,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.00000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 11,\n        \"sell_order_id\": 8,\n        \"amount\": \"0.50000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 12,\n        \"sell_order_id\": 8,\n        \"amount\": \"1.50000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 3,\n        \"sell_order_id\": 4,\n        \"amount\": \"0.00798\",\n        \"price\": \"62880.54\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 2,\n        \"sell_order_id\": 1,\n        \"amount\": \"0.00230\",\n        \"price\": \"63500.00\",\n        \"pair\": \"BTC/USDC\"\n    }\n]"
+				},
+				{
+					"name": "Trades By Order and Sort",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5050/trades/?sort=amount&order=desc",
+							"host": [
+								"localhost"
+							],
+							"port": "5050",
+							"path": [
+								"trades",
+								""
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "amount"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-length",
+							"value": "652"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "date",
+							"value": "Sun, 20 Apr 2025 14:30:26 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"buy_order_id\": 9,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.34500\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 10,\n        \"sell_order_id\": 8,\n        \"amount\": \"2.00000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 12,\n        \"sell_order_id\": 8,\n        \"amount\": \"1.50000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 11,\n        \"sell_order_id\": 8,\n        \"amount\": \"0.50000\",\n        \"price\": \"61577.30\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 7,\n        \"sell_order_id\": 6,\n        \"amount\": \"0.20000\",\n        \"price\": \"47500\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 3,\n        \"sell_order_id\": 4,\n        \"amount\": \"0.00798\",\n        \"price\": \"62880.54\",\n        \"pair\": \"BTC/USDC\"\n    },\n    {\n        \"buy_order_id\": 2,\n        \"sell_order_id\": 1,\n        \"amount\": \"0.00230\",\n        \"price\": \"63500.00\",\n        \"pair\": \"BTC/USDC\"\n    }\n]"
+				}
+			]
+		}
+	]
+}

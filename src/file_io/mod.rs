@@ -1,11 +1,11 @@
 use serde::{de::DeserializeOwned, Serialize};
 use std::{
     fs::{File, OpenOptions},
-    io::{self, BufReader, BufWriter, Write},
+    io::{self, BufReader, BufWriter},
     path::Path,
 };
 
-pub fn read<T, P>(path: P) -> std::io::Result<(T)>
+pub fn read<T, P>(path: P) -> std::io::Result<T>
 where
     T: DeserializeOwned,
     P: AsRef<Path>,
