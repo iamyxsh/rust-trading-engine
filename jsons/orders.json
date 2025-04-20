@@ -268,5 +268,14 @@
     "pair": "BTC/USDT",
     "limit_price": "65555.00",
     "side": "BUY"
+  },
+  {
+    "type_op": "CREATE",
+    "account_id": 77,
+    "amount": "0.25000",
+    "order_id": 28,
+    "pair": "BTC/USDT",
+    "limit_price": "65555.00",
+    "side": "BUY"
   }
 ]

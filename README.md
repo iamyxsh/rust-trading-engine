@@ -117,12 +117,17 @@ Receive events:
 { "type": "orderbook_snapshot", "books": { ... } }
 ```
 
-### Docker
+## Postman Collection
 
-Build and run with Docker Compose:
+A ready-to-import Postman collection is available in `./docs/postman_collection.json`. It includes predefined requests for all REST endpoints (`/orders`, `/trades`, etc.) and WebSocket tests.
 
-```bash
-docker-compose up --build
-```
+## Docker
+
+This service uses **cargo-chef** to dramatically speed up Docker image rebuilds by caching Rust dependency compilation.
+
+1. **Build & run** with Docker Compose:
+   ```bash
+   docker-compose up --build
+   ```
 
 The service will be available at `http://localhost:5050` and persists JSON data in `./jsons/`.

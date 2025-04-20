@@ -7,7 +7,7 @@ services:
     ports:
       - '5050:5050'
     volumes:
-      - ./jsons:/app/jsons
+      - ./jsons:/usr/local/bin/jsons
     restart: unless-stopped
     environment:
       RUST_LOG: actix_web=info
